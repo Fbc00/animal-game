@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+
+<html lang="pt-BR">
+ 
+<head>
+    {% include 'parciais/_head.html' %}
+</head>
+
+
+
+<body>
+    
+    {% include 'parciais/_nav.html' %}
+    
+    <div class="container">
+        {% block conteudo %}
+        {% endblock %}
+    </div>
+    
+
+{#    {% include 'parciais/_footer.html' %}#}
+    
+
+
+    <script src="{% static 'vendor/jquery/jquery.slim.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+</html>
