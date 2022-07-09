@@ -11,7 +11,9 @@ class Aposta(models.Model):
     data = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     resultado = models.BooleanField(default=False)
-
+    valor = models.FloatField(default=None )
+    ganho = models.FloatField(default=None )
+    
 class Bicho(models.Model):
     nome = models.CharField(
         verbose_name='Nome do Bicho',
