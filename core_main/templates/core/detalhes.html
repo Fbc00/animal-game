@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block conteudo %}
+{% for detail in apostas %}
+    {% if detail.resultado %}
+        <div class="alert alert-danger">
+            <strong>OBRIGADO PELA CARIDADE</strong>
+        </div>
+    {% else %}
+    <div class="alert alert-success">
+                <strong>PARABÉNS</strong>
+                <p>SE DEU BEM - DESSA VEZ.</p>
+
+
+    </div>
+    {% endif %}
+
+
+
+
+
+{% endfor %}
+
+{% endblock %}
