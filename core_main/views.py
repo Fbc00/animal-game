@@ -31,20 +31,25 @@ def registrar(request):
         senha2 = request.POST.get('senha2',None)
 
         if senha == senha2:
-            try:
-                user = User(email = email, username= usuario, password =senha)
-                user.save()
+            if len(senha) >=8 and len(usuario) >=5:
+                try:
+                    user = User(email = email, username= usuario, password =senha)
+                    user.save()
 
-                messages.success(
+                    messages.success(
+                        request,
+                        'Visitante Registrado com sucesso !!! logue e se divirta <3'
+                    )
+                    return redirect('login')
+                except IntegrityError as ie:
+                    messages.error(
                     request,
-                    'Visitante Registrado com sucesso !!! \n logue e se divirta <3'
-                )
-                return redirect('login')
-            except IntegrityError as ie:
+                    'Já existe alguem com esse usuario registrado !!!')
+                    return redirect('registrar')
+            else:
                 messages.error(
-                request,
-                'Já existe alguem com esse usuario registrado !!!')
-                return redirect('registrar')
+                    request,
+                    'Seu usuario precisa ter 5 digitos ou mais e sua senha precisa de 8 digitos ou mais !!!')
 
         else:
             messages.error(
