@@ -1,5 +1,8 @@
-from django.shortcuts import render
+import email
+from django.shortcuts import redirect, render
 from .models import Bicho, Aposta
+from django.contrib.auth.models import User
+from django.contrib import messages
 # Create your views here.
 
 
@@ -17,4 +20,30 @@ def detalhes(request):
     return render(request, 'core/detalhes.html', {'apostas': aposta})
 
 def registrar(request):
+    if request.method =='POST':
+
+        nome = request.POST.get('nome',None)
+        sobrenome = request.POST.get('sobrenome',None)
+        email = request.POST.get('email',None)
+        usuario = request.POST.get('usuario',None)
+        senha = request.POST.get('senha',None)
+        senha2 = request.POST.get('senha2',None)
+
+        if senha == senha2:
+            user = User(email = email, username= usuario, password =senha)
+            user.save()
+
+            messages.success(
+                request,
+                'Visitante Registrado com sucesso !!! \n logue e se divirta <3'
+            )
+            return redirect('login')
+
+        else:
+            messages.error(
+                request,
+                'Suas senhas estao diferentes !!!')
+            return redirect('registrar')
     return render(request, 'core/registrar.html')
+
+

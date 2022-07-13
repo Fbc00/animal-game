@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
@@ -22,3 +23,4 @@ class Bicho(models.Model):
     # grupo = ArrayField(models.CharField(max_length=8), default=list)
     def __str__(self):
         return self.nome
+

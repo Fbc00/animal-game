@@ -2,12 +2,18 @@
 
 {% block conteudo %}
 
+{% if messages %}
+        {% for mensagem in messages %}
+            <div class="alert alert-danger mt-5 mb-5" role="alert">
+                {{ mensagem }}
+            </div>
+        {% endfor %}
+    {% endif %}
 
 <form method="post" action="{% url 'registrar'%}">
   {% csrf_token %}
 
-
-    <div class="form-group">
+    <div class="form-group mt-5">
       <label for="exampleInputEmail1">Nome</label>
       <input type="text" class="form-control"  value="{{ request.POST.nome}}" name="nome" placeholder="nome">
     </div>
