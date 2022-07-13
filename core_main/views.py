@@ -1,4 +1,5 @@
 import email
+from django.db import IntegrityError
 from django.shortcuts import redirect, render
 from .models import Bicho, Aposta
 from django.contrib.auth.models import User
@@ -30,14 +31,20 @@ def registrar(request):
         senha2 = request.POST.get('senha2',None)
 
         if senha == senha2:
-            user = User(email = email, username= usuario, password =senha)
-            user.save()
+            try:
+                user = User(email = email, username= usuario, password =senha)
+                user.save()
 
-            messages.success(
+                messages.success(
+                    request,
+                    'Visitante Registrado com sucesso !!! \n logue e se divirta <3'
+                )
+                return redirect('login')
+            except IntegrityError as ie:
+                messages.error(
                 request,
-                'Visitante Registrado com sucesso !!! \n logue e se divirta <3'
-            )
-            return redirect('login')
+                'Já existe alguem com esse usuario registrado !!!')
+                return redirect('registrar')
 
         else:
             messages.error(
