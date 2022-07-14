@@ -1,8 +1,34 @@
 {% load static %}
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-            <a class="navbar-brand" href="#">Animal-game</a>
-
+<header class="header-js">
+  <div class="identification">
+        <p class="logo"> Animal-game</p>
+        <button class="btn-canvaOff" type="button" onclick="addCanvas()">
+            Faça o seu jogo
+        </button>
     </div>
-  </nav>
+        <div class="offCanvas js-offcanvas">
+                <button class="exit js-exit" onclick="exitCanvas()">X</button>
+                <ul>
+                        <img src="https://lulacerda.ig.com.br/wp-content/uploads/2021/02/EtJLXE6XEAEOYmX-1024x681.jpeg" alt="">
+                        <li>
+                <div class="card" style="width: 22rem; height: 25rem;">
+                        <form method="POST" action="" class="form-login">
+                                <div class="form-group">
+                                <label for="">Valor</label>
+                                <input type="text" class="form-control valor"  placeholder="" name="valor">
+                                </div>
+                                <div class="form-group">
+                                        <select name="bichos" id="" class="form-control">
+                                                {% for bicho in bichos %}
+                                                <option value="{{ bicho.id }}">{{ bicho.nome }}</option>
+                                                {% endfor %}
+                                        </select>
+                                </div>
+                              
+                                <button type="submit" class="btn btn-primary">Confirmar Aposta</button>
+                        </form>
+                 </div>
+                </li>
+                </ul>
+            </div>
+</header>

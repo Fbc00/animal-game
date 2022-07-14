@@ -2,22 +2,37 @@ import email
 from django.shortcuts import redirect, render
 from .models import Bicho, Aposta
 from django.contrib.auth.models import User
-from django.contrib import messages
+from django.contrib import messages, auth
 # Create your views here.
 
 
 def index(request):
     aposta = Aposta.objects.all()
-    return render(request, 'core/index.html', {'apostas': aposta})
+    bicho = Bicho.objects.all()
+    return render(request, 'core/index.html', {'objetos': bicho, 
+                                              'apostas': aposta})
 
 
 def login(request):
-    return render(request, 'core/login.html')
-
+    if request.user.is_authenticated:
+        return redirect('index')
+    if request.method != 'POST':
+        return render(request, 'core/login.html')
+    usuario = request.POST.get('usuario')
+    senha = request.POST.get('senha')
+    user = auth.authenticate(request, username=usuario, password=senha)
+    if user is None:
+        messages.error(request, 'Usuário ou senha inválidos')
+        return render(request, 'core/login.html')
+    else:
+        auth.login(request, user)
+        messages.add_message(request, messages.SUCCESS, 'Bem vindo!')
+        return redirect('dashboard')
 
 def detalhes(request):
     aposta = Aposta.objects.all()
     return render(request, 'core/detalhes.html', {'apostas': aposta})
+
 
 def registrar(request):
     if request.method =='POST':
