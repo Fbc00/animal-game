@@ -1,0 +1,97 @@
+body, html, ul {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+
+.canvas-color {
+    background-color: red;
+}
+
+.header-js {
+    background-color: rgb(205, 77, 77);
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 6rem;
+
+}
+
+.identification {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    height: 50%;
+}
+
+img {
+    width: 20rem;
+    height: 15rem;
+}
+.btn-canvaOff {
+    cursor: pointer;
+    border: none;
+    float: right;
+    background: white;
+    width: 50px;
+    height: 50px;
+
+}
+
+.offCanvas {
+    position: fixed;
+    width: 20%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    background-color: rgb(205, 77, 77);
+    transform: translateX(100%);
+    transition: all 1500ms cubic-bezier(.19, 1, .22, 1);
+}
+
+.canvas-active {
+    transform: none;
+    transition: all 1500ms cubic-bezier(.19, 1, .22, 1);
+}
+
+ul {
+    color: #dee2e6;
+    display: flex;
+    justify-content: center;
+    gap: 4.5rem;
+    flex-direction: column;
+    align-items: center;
+    letter-spacing: 0.5rem;
+    font-size: 2.5rem;
+}
+
+
+.exit {
+    top: 1.5rem;
+    left: 1.5rem;
+    position: absolute;
+    font-size: 2rem;
+    cursor: pointer;
+    border: none;
+    float: right;
+    background: white;
+    width: 50px;
+    height: 50px;
+
+}
+
+.btn-canvaOff {
+    cursor: pointer;
+    border: none;
+    float: right;
+    width: 50px;
+    height: 50px;
+}

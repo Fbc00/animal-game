@@ -14,13 +14,25 @@ class Aposta(models.Model):
     resultado = models.BooleanField(default=False)
     valor = models.FloatField(default=None)
     ganho = models.FloatField(default=None)
-    
+    sorteio_aposta = models.ForeignKey('Sorteio', on_delete=models.DO_NOTHING, default=None)
+
+
+
 class Bicho(models.Model):
     nome = models.CharField(
         verbose_name='Nome do Bicho',
         max_length=32,
     )
-    # grupo = ArrayField(models.CharField(max_length=8), default=list)
+    grupo = ArrayField(models.IntegerField(default=list), default=list)
+    # grupo = models.CharField(max_length=8, default=list)
+
     def __str__(self):
         return self.nome
+
+
+class Sorteio(models.Model):
+    data_sorteio = models.DateTimeField(auto_now_add=True, null=True )
+    data_criacao = models.DateTimeField(auto_now_add=True, null=False)
+    bicho_sorteado = models.ForeignKey('Bicho', on_delete=models.DO_NOTHING, null=True, blank=True)
+
 
