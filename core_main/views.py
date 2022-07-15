@@ -1,11 +1,12 @@
 import email
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from .models import Bicho, Aposta
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
 # Create your views here.
 
-
+@login_required(login_url='login')
 def index(request):
     aposta = Aposta.objects.all()
     bicho = Bicho.objects.all()
@@ -29,6 +30,7 @@ def login(request):
         messages.add_message(request, messages.SUCCESS, 'Bem vindo!')
         return redirect('dashboard')
 
+@login_required(login_url='login')
 def detalhes(request):
     aposta = Aposta.objects.all()
     return render(request, 'core/detalhes.html', {'apostas': aposta})
