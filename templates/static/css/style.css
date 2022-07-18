@@ -112,7 +112,7 @@ ul  {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 5rem;
+    gap: 2rem;
     align-items: center;
     padding: 5rem;
 

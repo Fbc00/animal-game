@@ -1,7 +1,7 @@
-<!-- {% if messages %}
-          {% for message in messages %}
-            <span class="alert alert-danger">
-              {{message.message}}
-            </span>
-          {% endfor %}
-{% endif %} -->
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}} btn-dark" role="alert">
+        {{ message }} !!
+    </div>
+    {% endfor %}
+{% endif %}

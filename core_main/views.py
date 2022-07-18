@@ -2,6 +2,7 @@ import email
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Bicho, Aposta
+from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
 # Create your views here.
@@ -24,12 +25,12 @@ def login(request):
     senha = request.POST.get('senha')
     user = auth.authenticate(request, username=usuario, password=senha)
     if user is None:
-        messages.error(request, 'Usuário ou senha inválidos')
+        messages.add_message(request, messages.ERROR, 'Usuário ou senha inválidos')
         return render(request, 'core/login.html')
     else:
         auth.login(request, user)
-        # messages.add_message(request, messages.SUCCESS, 'Bem vindo!')
         return redirect('index')
+
 
 def logout(request):
     auth.logout(request)
@@ -43,32 +44,48 @@ def detalhes(request, id):
     return render(request, 'core/detalhes.html', {'aposta': aposta})
 
 
-
 def registrar(request):
-    if request.method =='POST':
-        nome = request.POST.get('nome',None)
-        sobrenome = request.POST.get('sobrenome',None)
-        email = request.POST.get('email',None)
-        usuario = request.POST.get('usuario',None)
-        senha = request.POST.get('senha',None)
-        senha2 = request.POST.get('senha2',None)
+    if request.user.is_authenticated:
+        return redirect('index')
 
-        if senha == senha2:
-            user = User(email = email, username= usuario, password =senha)
-            user.save()
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        sobrenome = request.POST.get('sobrenome')
+        email = request.POST.get('email')
+        usuario = request.POST.get('usuario')
+        senha = request.POST.get('senha')
+        senha2 = request.POST.get('senha2')
 
-            messages.success(
-                request,
-                'Visitante Registrado com sucesso !!! \n logue e se divirta <3'
-            )
-            return redirect('login')
+        if not nome or not sobrenome or not email or not usuario or not senha or not senha2:
+            messages.error(request, 'Preencha todos os campos')
+            return render(request, 'core/registrar.html')
+        if senha != senha2:
+            messages.error(request, 'Senhas não conferem')
+            return render(request, 'core/registrar.html')
 
-        else:
-            messages.error(
-                request,
-                'Suas senhas estao diferentes !!!')
-            return redirect('registrar')
-    return render(request, 'core/registrar.html')
+        if len(senha) < 6 and len(usuario) < 6:
+            messages.error(request, 'Senha ou usuário muito curto')
+            return render(request, 'core/registrar.html')
 
+        try:
+            validate_email(email)
+        except:
+            messages.error(request, 'Email inválido')
+            return render(request, 'core/registrar.html')
+
+        if User.objects.filter(username=usuario).exists():
+            messages.error(request, 'Usuário já existe')
+            return render(request, 'core/registrar.html')
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email já existe')
+            return render(request, 'core/registrar.html')
+        messages.add_message(request, messages.SUCCESS, 'Cadastro realizado com sucesso!')
+        user = User.objects.create_user(username=usuario, email=email, password=senha, first_name=nome,
+                                        last_name=sobrenome)
+        user.save()
+        return redirect('login')
+    else:
+        return render(request, 'core/registrar.html')
 
 
