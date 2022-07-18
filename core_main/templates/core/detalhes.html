@@ -1,25 +1,20 @@
 {% extends 'base.html' %}
 
-
 {% block conteudo %}
-{% for detail in apostas %}
-    {% if detail.resultado %}
-        <div class="alert alert-danger">
-            <strong>OBRIGADO PELA CARIDADE</strong>
-        </div>
-    {% else %}
-    <div class="alert alert-success">
-                <strong>PARABÉNS</strong>
-                <p>SE DEU BEM - DESSA VEZ.</p>
+    <div class="detalhes-container" >
+    <div class="detalhes">
+    <img src="https://i.ytimg.com/vi/EB4BI4l-4HM/maxresdefault.jpg" alt="" style="width: 200px">
 
-
+            <p>Bicho apostado: {{ aposta.bicho }} </p>
+            <p> Valor da aposta: {{ aposta.valor }} </p>
+                {% if aposta.resultado %}
+                    <p class="btn-outline-success"> {{ 'WIN' }}</p>
+                    {% else %}
+                    <p class="btn-outline-danger">{{ 'LOSE' }}</p>
+                   {% endif %}
+            <p> Ganhos: {{ aposta.ganho }} </p>
+            <p>Data da Aposta: {{ aposta.data }}</p>
+        <a href="{% url  'index' %}" class="btn btn-primary"> Volta ao home </a>
     </div>
-    {% endif %}
-
-
-
-
-
-{% endfor %}
-
+    </div>
 {% endblock %}

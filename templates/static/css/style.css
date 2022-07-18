@@ -1,4 +1,8 @@
+
+
 body, html, ul {
+
+    text-decoration: none;
     scroll-behavior: smooth;
     font-size: 16px;
     list-style: none;
@@ -8,44 +12,30 @@ body, html, ul {
     height: 100%;
 }
 
-
-.canvas-color {
-    background-color: red;
-}
-
 .header-js {
     background-color: rgb(205, 77, 77);
-    top: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    position: fixed;
+    justify-content: space-around;
     width: 100%;
     height: 6rem;
+    font-size: 1.5rem;
 
 }
 
 .identification {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
     color: white;
-    height: 50%;
+    height: 100%;
+    align-items: center;
 }
 
-img {
+ul > img {
     width: 20rem;
     height: 15rem;
 }
-.btn-canvaOff {
-    cursor: pointer;
-    border: none;
-    float: right;
-    background: white;
-    width: 50px;
-    height: 50px;
-
-}
-
 .offCanvas {
     position: fixed;
     width: 20%;
@@ -62,36 +52,107 @@ img {
     transition: all 1500ms cubic-bezier(.19, 1, .22, 1);
 }
 
-ul {
+ul  {
     color: #dee2e6;
     display: flex;
     justify-content: center;
-    gap: 4.5rem;
+    gap: 1rem;
     flex-direction: column;
     align-items: center;
     letter-spacing: 0.5rem;
-    font-size: 2.5rem;
 }
+
+
+.form-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30rem;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 
 
 .exit {
     top: 1.5rem;
     left: 1.5rem;
     position: absolute;
+    background: transparent;
     font-size: 2rem;
     cursor: pointer;
     border: none;
     float: right;
-    background: white;
     width: 50px;
     height: 50px;
+    color: white;
 
 }
 
 .btn-canvaOff {
+    vertical-align: middle;
+    padding: 0.375rem 0.75rem;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    background-color: rgb(205, 77, 77);
     cursor: pointer;
     border: none;
-    float: right;
-    width: 50px;
-    height: 50px;
+    color: white;
+}
+
+.btn-canvaOff:hover {
+    background-color: rgb(234, 112, 112);
+    box-shadow: 0.5rem 0.5rem 0.5rem rgb(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.login-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5rem;
+    align-items: center;
+    padding: 5rem;
+
+}
+
+.login-container > img {
+    width: 37rem;
+    height: 27rem;
+}
+
+.detalhes-container {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+}
+.detalhes-container > .detalhes {
+    gap: .5rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    width: 400px;
+    height: 500px;
+    background-color: aliceblue;
+    border-radius: 0.5rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem rgb(0, 0, 0, 0.2);
+    font-size: 1.2rem;
+}
+.container-registrar {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+}
+.container-registrar input {
+
 }

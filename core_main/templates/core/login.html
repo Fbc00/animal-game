@@ -8,17 +8,23 @@
     </div>
 {% endfor %}
 {% endif %}
+     <div class="login-container" >
 
-<form method="POST" action="" class="form-login">
-  {% csrf_token %}
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email</label>
-    <input type="email" class="form-control"  name="usuario" placeholder="usuario">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Senha</label>
-    <input type="password" class="form-control"  placeholder="senha" name="senha">
-  </div>
-  <button type="submit" class="btn btn-primary">Logar</button>
-</form>
+         <img src="https://pbs.twimg.com/media/EShi2dmXYAEggYn?format=jpg&name=900x900" alt="">
+         <form method="POST" action="" class="form-login " style="width: 37rem;">
+          {% csrf_token %}
+          <div class="form-group ">
+            <label for="exampleInputEmail1">Email</label>
+            <input type="text" class="form-control"  name="usuario" placeholder="usuario" style="width: 37rem";>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Senha</label>
+            <input type="password" class="form-control"  placeholder="senha" name="senha" style="width: 37rem";>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 37rem";>Logar</button>
+             <a href="{% url 'registrar' %}"> Criar Conta</a>
+        </form>
+
+     </div>
 {% endblock %}

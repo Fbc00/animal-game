@@ -2,33 +2,36 @@
 <header class="header-js">
   <div class="identification">
         <p class="logo"> Animal-game</p>
+      {% if request.user.is_authenticated %}
         <button class="btn-canvaOff" type="button" onclick="addCanvas()">
             Faça o seu jogo
         </button>
+
+ <a class="btn btn-outline-dark" href="{% url 'logout' %}"> Logout</a>
     </div>
+
         <div class="offCanvas js-offcanvas">
                 <button class="exit js-exit" onclick="exitCanvas()">X</button>
                 <ul>
                         <img src="https://lulacerda.ig.com.br/wp-content/uploads/2021/02/EtJLXE6XEAEOYmX-1024x681.jpeg" alt="">
+                        <a href="https://senai.club/senai-belford-roxo-2019-rj/">Saiba mais</a>
+                <li></li>
                         <li>
-                <div class="card" style="width: 22rem; height: 25rem;">
                         <form method="POST" action="" class="form-login">
                                 <div class="form-group">
                                 <label for="">Valor</label>
                                 <input type="text" class="form-control valor"  placeholder="" name="valor">
                                 </div>
                                 <div class="form-group">
-                                        <select name="bichos" id="" class="form-control">
-                                                {% for bicho in bichos %}
-                                                <option value="{{ bicho.id }}">{{ bicho.nome }}</option>
-                                                {% endfor %}
+                                <label for="">Bicho</label>
+                                        <select name="bichos" id="" class="form-control bicho">
                                         </select>
                                 </div>
                               
                                 <button type="submit" class="btn btn-primary">Confirmar Aposta</button>
                         </form>
-                 </div>
                 </li>
                 </ul>
             </div>
+    {% endif %}
 </header>
