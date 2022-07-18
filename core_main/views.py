@@ -1,14 +1,15 @@
 import email
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from .models import Bicho, Aposta
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
 # Create your views here.
 
+
 @login_required(login_url='login')
 def index(request):
-    aposta = Aposta.objects.all()
+    aposta = Aposta.objects.filter(id=request.user.id)
     bicho = Bicho.objects.all()
     return render(request, 'core/index.html', {'objetos': bicho, 
                                               'apostas': aposta})
@@ -27,18 +28,24 @@ def login(request):
         return render(request, 'core/login.html')
     else:
         auth.login(request, user)
-        messages.add_message(request, messages.SUCCESS, 'Bem vindo!')
-        return redirect('dashboard')
+        # messages.add_message(request, messages.SUCCESS, 'Bem vindo!')
+        return redirect('index')
+
+def logout(request):
+    auth.logout(request)
+    return redirect('login')
+
 
 @login_required(login_url='login')
-def detalhes(request):
-    aposta = Aposta.objects.all()
-    return render(request, 'core/detalhes.html', {'apostas': aposta})
+def detalhes(request, id):
+    aposta = get_object_or_404(Aposta, id=id)
+    bicho = Bicho.objects.all()
+    return render(request, 'core/detalhes.html', {'aposta': aposta})
+
 
 
 def registrar(request):
     if request.method =='POST':
-
         nome = request.POST.get('nome',None)
         sobrenome = request.POST.get('sobrenome',None)
         email = request.POST.get('email',None)
@@ -62,5 +69,6 @@ def registrar(request):
                 'Suas senhas estao diferentes !!!')
             return redirect('registrar')
     return render(request, 'core/registrar.html')
+
 
 

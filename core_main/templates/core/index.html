@@ -15,7 +15,7 @@
 
           {% for apos in apostas %}
             <tr>
-                <td>{{ apos.nome }}</td>
+                <td>  <a href="{%  url 'detalhes' apos.id %}"> {{ apos.bicho }} </a></td>
                 {% if apos.resultado %}
                 <td class="btn-outline-success">{{ 'WIN' }}</td>
                 {% else %}

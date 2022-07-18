@@ -9,8 +9,8 @@
             </div>
         {% endfor %}
     {% endif %}
-
-<form method="post" action="{% url 'registrar'%}">
+    <div class="container-registrar">
+<form method="post" action="{% url 'registrar'%}" style="width: 100%;">
   {% csrf_token %}
 
     <div class="form-group mt-5">
@@ -27,7 +27,7 @@
     <input type="email" class="form-control" id="exampleInputEmail1"  value="{{ request.POST.email}}" name="email" placeholder="Email">
   </div>
 
-  <div class="form-group">
+  <div clawss="form-group">
     <label for="exampleInputEmail1">Usuario</label>
     <input type="text" class="form-control"  value="{{ request.POST.usuario}}" name="usuario" placeholder="usuario">
   </div>
@@ -42,5 +42,6 @@
   <button type="submit" class="btn btn-primary">Cadastra me</button>
 
 </form>
+    </div>
 
 {% endblock %}
