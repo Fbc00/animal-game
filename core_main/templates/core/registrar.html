@@ -2,13 +2,7 @@
 
 {% block conteudo %}
 
-{% if messages %}
-        {% for mensagem in messages %}
-            <div class="alert alert-danger mt-5 mb-5" role="alert">
-                {{ mensagem }}
-            </div>
-        {% endfor %}
-    {% endif %}
+
     <div class="container-registrar">
 <form method="post" action="{% url 'registrar'%}" style="width: 100%;">
   {% csrf_token %}
@@ -42,6 +36,8 @@
   <button type="submit" class="btn btn-primary">Cadastra me</button>
 
 </form>
+     {% include 'parciais/_messages.html' %}
     </div>
+
 
 {% endblock %}

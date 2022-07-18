@@ -1,13 +1,7 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-{% if messages %}
-{% for mensagem in messages %}
-    <div class="alert alert-success mt-5 mb-5" role="alert">
-        {{ mensagem }}
-    </div>
-{% endfor %}
-{% endif %}
+
      <div class="login-container" >
 
          <img src="https://pbs.twimg.com/media/EShi2dmXYAEggYn?format=jpg&name=900x900" alt="">
@@ -26,5 +20,7 @@
              <a href="{% url 'registrar' %}"> Criar Conta</a>
         </form>
 
+{% include 'parciais/_messages.html' %}
      </div>
+
 {% endblock %}
