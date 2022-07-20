@@ -18,6 +18,16 @@
                 <li></li>
                         <li>
                         <form method="POST" action="" class="form-login">
+
+                            <label for="">Dia da aposta</label>
+                        <div class="form-group">
+                                <select class="form-control" name="id_user" id="id_user">
+                                    {% for sorteio in objetos %}
+                                        <option value="{{sorteio.id}}">{{sorteio.data_sorteio}}</option>
+                                    {% endfor %}
+                                </select>
+                                </div>
+
                                 <div class="form-group">
                                 <label for="">Valor</label>
                                 <input type="text" class="form-control valor"  placeholder="" name="valor">
@@ -27,6 +37,8 @@
                                         <select name="bichos" id="" class="form-control bicho">
                                         </select>
                                 </div>
+                            <div class="form-group">
+
                               
                                 <button type="submit" class="btn btn-primary">Confirmar Aposta</button>
                         </form>

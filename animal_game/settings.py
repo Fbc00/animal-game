@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core_main',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -109,12 +110,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
+DATE_FORMAT = "%d/%m/%Y"
+DATE_INPUT_FORMATS = ['%d/%m/%Y']
 USE_I18N = True
-
+USE_L10N = False
 USE_TZ = True
 
 
@@ -135,4 +138,9 @@ MESSSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
 }
 
+
+CRONJOBS = [
+    # ('*/1 * * * *', 'core_main.services.cron.my_scheduled_job'),
+    ('*/1 * * * *', 'core_main.services.cron.cron_sorteio_por_semana'),
+]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

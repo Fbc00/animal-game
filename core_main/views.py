@@ -1,7 +1,8 @@
-import email
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
-from .models import Bicho, Aposta
+from .models import Bicho, Aposta, Sorteio
+from datetime import datetime
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
@@ -11,8 +12,8 @@ from django.contrib import messages, auth
 @login_required(login_url='login')
 def index(request):
     aposta = Aposta.objects.filter(id=request.user.id)
-    bicho = Bicho.objects.all()
-    return render(request, 'core/index.html', {'objetos': bicho, 
+    sorteio = Sorteio.objects.all()
+    return render(request, 'core/index.html', {'objetos': sorteio,
                                               'apostas': aposta})
 
 
