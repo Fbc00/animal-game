@@ -14,6 +14,10 @@ from pathlib import Path
 import os
 from django.core.management.utils import get_random_secret_key
 from django.contrib.messages import constants as messages
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -114,8 +118,8 @@ LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'America/Sao_Paulo'
 
-DATE_FORMAT = "%d/%m/%Y"
-DATE_INPUT_FORMATS = ['%d/%m/%Y']
+DATE_FORMAT = "Y-m-d"
+DATE_INPUT_FORMATS = ['%Y-%m-%d']
 USE_I18N = True
 USE_L10N = False
 USE_TZ = True

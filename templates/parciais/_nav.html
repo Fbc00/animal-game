@@ -17,13 +17,13 @@
                         <a href="https://senai.club/senai-belford-roxo-2019-rj/">Saiba mais</a>
                 <li></li>
                         <li>
-                        <form method="POST" action="" class="form-login">
-
-                            <label for="">Dia da aposta</label>
+                        <form method="POST" action="{% url 'apostas' %}" class="form-login">
+                            {% csrf_token %}
+                            <label for=""  name="data">Dia da aposta</label>
                         <div class="form-group">
-                                <select class="form-control" name="id_user" id="id_user">
+                                <select class="form-control" name="data_valor" id="">
                                     {% for sorteio in objetos %}
-                                        <option value="{{sorteio.id}}">{{sorteio.data_sorteio}}</option>
+                                        <option value="{{ sorteio.data_sorteio }}"  name="">{{sorteio.data_sorteio}}</option>
                                     {% endfor %}
                                 </select>
                                 </div>

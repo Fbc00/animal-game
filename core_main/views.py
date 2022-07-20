@@ -5,6 +5,7 @@ from .models import Bicho, Aposta, Sorteio
 from datetime import datetime
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
+from datetime import datetime, timedelta
 from django.contrib import messages, auth
 # Create your views here.
 
@@ -89,4 +90,24 @@ def registrar(request):
     else:
         return render(request, 'core/registrar.html')
 
+def aposta_feita(request):
+    if request.method == 'POST':
+        data = request.POST.get('data_valor')
+        valor = request.POST.get('valor')
+        bichos = request.POST.get('bichos')
+
+        if  not valor.isdigit() and  not (1 >= valor >= 20):
+            return redirect('index')
+
+        # if not Sorteio.objects.filter(data_sorteio=data) and not Bicho.objects.filter(id=bichos).exists():
+        #     return redirect('index')
+        bicho_agora = Bicho.objects.get(id=bichos)
+        sorteio_aposta_Agora= Sorteio.objects.get(data_sorteio = data)
+        #sorteio_aposta_Agora.strftime("%y/%m/%d")
+
+        aposta = Aposta.objects.create(usuario = request.user, sorteio_aposta = sorteio_aposta_Agora , valor = valor, bicho = bicho_agora)
+        aposta.save()
+        return redirect('logout')
+
+    return redirect('index')
 
