@@ -15,7 +15,9 @@ class Aposta(models.Model):
     valor = models.FloatField(default=None)
     ganho = models.FloatField(default=0)
     sorteio_aposta = models.ForeignKey('Sorteio', on_delete=models.DO_NOTHING, default=None, null=True, blank=True)
-
+    
+    def __str__(self):
+        return self.data
 
 class Bicho(models.Model):
     nome = models.CharField(

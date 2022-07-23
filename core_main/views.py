@@ -1,4 +1,5 @@
 
+from multiprocessing import context
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Bicho, Aposta, Sorteio
@@ -10,12 +11,20 @@ from django.contrib import messages, auth
 # Create your views here.
 
 
+# @login_required(login_url='login')
+# def index(request):
+#     aposta = Aposta.objects.filter(id=request.user.id)
+#     sorteio = Sorteio.objects.all()
+#     # aposta= Aposta.objects.get(bicho=1)
+#     return render(request, 'core/index.html', {'objetos': sorteio,'apostas': aposta})
+
 @login_required(login_url='login')
 def index(request):
-    aposta = Aposta.objects.filter(id=request.user.id)
+    aposta = Aposta.objects.filter(usuario_id=request.user.id)
     sorteio = Sorteio.objects.all()
-    return render(request, 'core/index.html', {'objetos': sorteio,
-                                              'apostas': aposta})
+    # aposta= Aposta.objects.get(bicho=1)
+    return render(request, 'core/index.html', {'objetos': sorteio,'apostas': aposta})
+                
 
 
 def login(request):
@@ -107,7 +116,8 @@ def aposta_feita(request):
 
         aposta = Aposta.objects.create(usuario = request.user, sorteio_aposta = sorteio_aposta_Agora , valor = valor, bicho = bicho_agora)
         aposta.save()
-        return redirect('logout')
+        
+    
 
     return redirect('index')
 
