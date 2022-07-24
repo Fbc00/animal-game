@@ -10,7 +10,7 @@ class BichoAdmin(admin.ModelAdmin):
     list_display = ('nome', 'id', 'grupo',)
 
 class SorteioAdmin(admin.ModelAdmin):
-    list_display = ('data_sorteio', 'bicho_sorteado', 'data_criacao')
+    list_display = ('data_sorteio', 'bicho_sorteado', 'data_criacao', 'valido',)
 
 admin.site.register(Aposta, ApostaAdmin)
 admin.site.register(Sorteio, SorteioAdmin)

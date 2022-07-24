@@ -6,10 +6,11 @@ def cron_sorteio_por_semana():
     return True
 
 
-# def my_scheduled_job():
-#     scripts.sortear_numeros()
-#     scripts.set_sorteio()
-#     scripts.verifica_se_ganhou()
-#     return True
+def generalJob():
+    # scripts.sortear_numeros()
+    # scripts.set_sorteio()
+    # scripts.verifica_se_ganhou()
+    scripts.desativaSorteio()
+    return
 
 

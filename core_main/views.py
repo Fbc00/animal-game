@@ -20,9 +20,9 @@ from django.contrib import messages, auth
 
 @login_required(login_url='login')
 def index(request):
+    data_hoje = datetime.now().strftime("%Y-%m-%d")
     aposta = Aposta.objects.filter(usuario_id=request.user.id)
-    sorteio = Sorteio.objects.all()
-    # aposta= Aposta.objects.get(bicho=1)
+    sorteio = Sorteio.objects.filter(data_sorteio__gte=data_hoje, valido=True)
     return render(request, 'core/index.html', {'objetos': sorteio,'apostas': aposta})
                 
 
@@ -50,9 +50,10 @@ def logout(request):
 
 @login_required(login_url='login')
 def detalhes(request, id):
+    data_hoje = datetime.now().strftime("%Y-%m-%d")
     aposta = get_object_or_404(Aposta, id=id)
-    bicho = Bicho.objects.all()
-    return render(request, 'core/detalhes.html', {'aposta': aposta})
+    sorteio = Sorteio.objects.filter(data_sorteio__gte=data_hoje, valido=True)
+    return render(request, 'core/detalhes.html', {'aposta': aposta, 'objetos': sorteio})
 
 
 def registrar(request):
@@ -104,17 +105,15 @@ def aposta_feita(request):
         data = request.POST.get('data_valor')
         valor = request.POST.get('valor')
         bichos = request.POST.get('bichos')
-
-        if  not valor.isdigit() and  not (1 >= valor >= 20):
+        if  not valor.isdigit() or  not (1 >= int(valor) >= 20):
             return redirect('index')
-
+        sorteio_aposta_Agora = Sorteio.objects.get(data_sorteio=data)
         # if not Sorteio.objects.filter(data_sorteio=data) and not Bicho.objects.filter(id=bichos).exists():
         #     return redirect('index')
-        bicho_agora = Bicho.objects.get(id=bichos)
-        sorteio_aposta_Agora= Sorteio.objects.get(data_sorteio = data)
+
         #sorteio_aposta_Agora.strftime("%y/%m/%d")
 
-        aposta = Aposta.objects.create(usuario = request.user, sorteio_aposta = sorteio_aposta_Agora , valor = valor, bicho = bicho_agora)
+        aposta = Aposta.objects.create(usuario = request.user, sorteio_aposta = sorteio_aposta_Agora , valor = valor, bicho_id = bichos)
         aposta.save()
         
     

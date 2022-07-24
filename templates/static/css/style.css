@@ -1,7 +1,6 @@
 
 
 body, html, ul {
-
     text-decoration: none;
     scroll-behavior: smooth;
     font-size: 16px;
@@ -59,7 +58,6 @@ ul  {
     gap: 1rem;
     flex-direction: column;
     align-items: center;
-    letter-spacing: 0.5rem;
 }
 
 
@@ -124,7 +122,6 @@ ul  {
 }
 
 .detalhes-container {
-
     display: flex;
     justify-content: center;
     align-items: center;

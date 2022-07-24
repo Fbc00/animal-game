@@ -36,7 +36,7 @@ class Sorteio(models.Model):
     data_sorteio = models.DateField(auto_now_add=False, auto_now=False,  null=True, unique=True)
     data_criacao = models.DateField(auto_now_add=True, null=False)
     bicho_sorteado = models.ForeignKey('Bicho', on_delete=models.DO_NOTHING, null=True, blank=True, related_name='bicho_do_dia')
-    #ativo = models.BooleanField(default=True)
+    valido = models.BooleanField(default=True)
 
 
 

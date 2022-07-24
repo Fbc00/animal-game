@@ -144,7 +144,7 @@ MESSSAGE_TAGS = {
 
 
 CRONJOBS = [
-    # ('*/1 * * * *', 'core_main.services.cron.my_scheduled_job'),
-    ('*/1 * * * *', 'core_main.services.cron.cron_sorteio_por_semana'),
+    ('0 10 * * *', 'core_main.services.cron.generalJob'),
+    ('0 */5 * * *', 'core_main.services.cron.cron_sorteio_por_semana'),
 ]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
