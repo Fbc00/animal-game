@@ -1,0 +1,1 @@
+web: gunicorn animal_game.wsgi
