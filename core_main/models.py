@@ -39,5 +39,11 @@ class Sorteio(models.Model):
     valido = models.BooleanField(default=True)
 
 
+    def __str__(self):
+        return  str(self.data_sorteio)
+
+    def get_data_sorteio(self):
+        return  self.data_sorteio.strftime("%Y-%m-%d")
+
 
 

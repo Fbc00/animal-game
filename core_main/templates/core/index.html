@@ -1,32 +1,47 @@
 {% extends 'base.html' %}
     {% block conteudo %}
-  <br><br><br><br>
-    <h1>TODAS SUAS APOSTAS</h1>
-        <table class="table mb">
-          <thead>
-            <tr>
-              <th > Bicho </th>
-              <th>Resultado</th>
-              <th>Valor Apostado</th>
-              <th>Ganhos</th>
-            </tr>
-          </thead>
-          <tbody>
+      <br><br><br><br>
+        <h1>TODAS SUAS APOSTAS</h1>
+            <table class="table mb">
+              <thead>
+                <tr>
+                  <th > Bicho </th>
+                  <th>Resultado</th>
+                  <th>Valor Apostado</th>
+                  <th>Ganhos</th>
+                </tr>
+              </thead>
+              <tbody>
 
-          {% for apos in apostas %}
-            <tr>
-                <td>  <a href="{%  url 'detalhes' apos.id %}"> {{ apos.bicho }} </a></td>
-                {% if apos.resultado %}
-                <td class="btn-outline-success">{{ 'WIN' }}</td>
-                {% else %}
-                <td class="btn-outline-danger">{{ 'LOSE' }}</td>
-                {% endif %}
-                <td> {{ apos.valor }}</td>
-                <td>{{ apos.ganho}}</td>
-            </tr>
-           {% endfor %}
+              {% for apos in apostas %}
+                <tr>
+                    <td>  <a href="{%  url 'detalhes' apos.id %}"> {{ apos.bicho }} </a></td>
+                    {% if apos.resultado %}
+                    <td class="btn-outline-success">{{ 'WIN' }}</td>
+                    {% else %}
+                    <td class="btn-outline-danger">{{ 'LOSE' }}</td>
+                    {% endif %}
+                    <td> {{ apos.valor }}</td>
+                    <td>{{ apos.ganho}}</td>
+                </tr>
+               {% endfor %}
 
-          </tbody>
-        </table>
+              </tbody>
+            </table>
 
+        <div class="paginator">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                {% for pagina in apostas.paginator.page_range %}
+                  {% if pagina.paginator.number == pagina %}
+                  <li class="page-item active btn-dark"><a class="page-link" href="?p={{ pagina }}"> {{ pagina }}</a>
+                  </li>
+                  {% else %}
+                  <li class="page-item"><a class="page-link" href="?p={{ pagina }}"> {{ pagina }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </nav>
+        </div>
     {% endblock %}

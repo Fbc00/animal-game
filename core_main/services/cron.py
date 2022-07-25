@@ -7,9 +7,9 @@ def cron_sorteio_por_semana():
 
 
 def generalJob():
-    # scripts.sortear_numeros()
-    # scripts.set_sorteio()
-    # scripts.verifica_se_ganhou()
+    scripts.sortear_numeros()
+    scripts.set_sorteio()
+    scripts.verifica_se_ganhou()
     scripts.desativaSorteio()
     return
 

@@ -3,7 +3,7 @@ from multiprocessing import context
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Bicho, Aposta, Sorteio
-from datetime import datetime
+from django.core.paginator import Paginator
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
@@ -21,8 +21,11 @@ from django.contrib import messages, auth
 @login_required(login_url='login')
 def index(request):
     data_hoje = datetime.now().strftime("%Y-%m-%d")
-    aposta = Aposta.objects.filter(usuario_id=request.user.id)
+    aposta = Aposta.objects.filter(usuario_id=request.user.id).order_by('sorteio_aposta__aposta__data')
     sorteio = Sorteio.objects.filter(data_sorteio__gte=data_hoje, valido=True)
+    paginator = Paginator(aposta, 5)
+    page = request.GET.get('p')
+    aposta = paginator.get_page(page)
     return render(request, 'core/index.html', {'objetos': sorteio,'apostas': aposta})
                 
 
@@ -53,6 +56,8 @@ def detalhes(request, id):
     data_hoje = datetime.now().strftime("%Y-%m-%d")
     aposta = get_object_or_404(Aposta, id=id)
     sorteio = Sorteio.objects.filter(data_sorteio__gte=data_hoje, valido=True)
+
+
     return render(request, 'core/detalhes.html', {'aposta': aposta, 'objetos': sorteio})
 
 
@@ -105,18 +110,18 @@ def aposta_feita(request):
         data = request.POST.get('data_valor')
         valor = request.POST.get('valor')
         bichos = request.POST.get('bichos')
-        if  not valor.isdigit() or  not (1 >= int(valor) >= 20):
+        if  not valor.isdigit() or  not (1 <= int(valor) <= 50 ):
             return redirect('index')
         sorteio_aposta_Agora = Sorteio.objects.get(data_sorteio=data)
+        aposta = Aposta.objects.create(usuario=request.user, sorteio_aposta_id=sorteio_aposta_Agora.id, valor=valor,
+                                       bicho_id=bichos)
+
         # if not Sorteio.objects.filter(data_sorteio=data) and not Bicho.objects.filter(id=bichos).exists():
         #     return redirect('index')
 
         #sorteio_aposta_Agora.strftime("%y/%m/%d")
 
-        aposta = Aposta.objects.create(usuario = request.user, sorteio_aposta = sorteio_aposta_Agora , valor = valor, bicho_id = bichos)
-        aposta.save()
-        
     
 
-    return redirect('index')
+        return redirect('logout')
 

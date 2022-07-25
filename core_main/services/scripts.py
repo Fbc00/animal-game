@@ -7,13 +7,9 @@ from django.db.models import F
 
 
 def sortear_numeros():
-    numero = random.randint(0, 99)
-    bichos = Bicho.objects.all()
-
-    for bicho in bichos:
-        if numero in bicho.grupo:
-            return bicho
-
+    numero = random.randint(0, 26)
+    bicho_sorteado = Bicho.objects.get(id=numero)
+    return bicho_sorteado
 
 def gera_sorteios():
     for i in range(0, 5):
@@ -25,15 +21,17 @@ def gera_sorteios():
 
 def set_sorteio():
     agora = datetime.today().strftime('%Y-%m-%d')
-    sorteio = Sorteio.objects.get(data_sorteio=agora).update(bicho_sorteado=sortear_numeros())
-    return sorteio
+    bicho = sortear_numeros()
+    sorteio = Sorteio.objects.filter(data_sorteio=agora).update(bicho_sorteado_id=bicho.id)
+    return
 
 
 def verifica_se_ganhou():
     data = datetime.today().strftime('%Y-%m-%d')
+    data_ganho = datetime.today()
     sorteio_do_dia = Sorteio.objects.get(data_sorteio=data)
-    ganhadores = Aposta.objects.filter(bicho=sorteio_do_dia.bicho_sorteado,
-                                       sorteio_aposta=sorteio_do_dia).update(resultado=True, ganho=F('valor') * 18)
+    ganhadores = Aposta.objects.filter(bicho_id=sorteio_do_dia.bicho_sorteado_id,
+                                       sorteio_aposta_id=sorteio_do_dia.pk).update(resultado=True, ganho=F('valor') * 18)
     return
 
 
