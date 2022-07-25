@@ -16,16 +16,22 @@
               {% for apos in apostas %}
                 <tr>
                     <td>  <a href="{%  url 'detalhes' apos.id %}"> {{ apos.bicho }} </a></td>
-                    {% if apos.resultado %}
-                    <td class="btn-outline-success">{{ 'WIN' }}</td>
-                    {% else %}
-                    <td class="btn-outline-danger">{{ 'LOSE' }}</td>
-                    {% endif %}
-                    <td> {{ apos.valor }}</td>
-                    <td>{{ apos.ganho}}</td>
+                    
+                    {% if apos.sorteio_aposta.bicho_sorteado == none  %}
+                      <td class="btn-outline-warning">AGUARDE</td>
+                      {% else %}
+                       {% if apos.resultado %}
+                      <td class="btn-outline-success">{{ 'WIN' }}</td>
+                      {% else %}
+                      <td class="btn-outline-danger">{{ 'LOSE' }}</td>
+                      {% endif %}
+                      {% endif %}
+                      <td> {{ apos.valor }}</td>
+                      <td>{{ apos.ganho}}</td>
                 </tr>
                {% endfor %}
 
+           
               </tbody>
             </table>
 

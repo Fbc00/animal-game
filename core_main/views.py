@@ -23,6 +23,7 @@ def index(request):
     data_hoje = datetime.now().strftime("%Y-%m-%d")
     aposta = Aposta.objects.filter(usuario_id=request.user.id).order_by('sorteio_aposta__aposta__data')
     sorteio = Sorteio.objects.filter(data_sorteio__gte=data_hoje, valido=True)
+    # sorteio_aguarda = Sorteio.objects.filter(id=aposta.sorteio_aposta)
     paginator = Paginator(aposta, 5)
     page = request.GET.get('p')
     aposta = paginator.get_page(page)
