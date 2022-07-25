@@ -15,7 +15,7 @@ import os
 from django.core.management.utils import get_random_secret_key
 from django.contrib.messages import constants as messages
 from dotenv import load_dotenv
-
+import django_on_heroku
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -148,3 +148,5 @@ CRONJOBS = [
     ('0 */5 * * *', 'core_main.services.cron.cron_sorteio_por_semana'),
 ]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+django_on_heroku.settings(locals())
