@@ -37,7 +37,7 @@
 
         <div class="paginator">
             <nav aria-label="Page navigation example">
-              <ul class="pagination">
+              <ul class="pagination" style="flex-direction: row;">
                 {% for pagina in apostas.paginator.page_range %}
                   {% if pagina.paginator.number == pagina %}
                   <li class="page-item active btn-dark"><a class="page-link" href="?p={{ pagina }}"> {{ pagina }}</a>

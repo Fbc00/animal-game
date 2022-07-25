@@ -13,7 +13,7 @@
                     <p class="btn-outline-danger">{{ 'LOSE' }}</p>
                    {% endif %}
             <p> Ganhos: {{ aposta.ganho }} </p>
-            <p>Data da Aposta: {{ aposta.data }}</p>
+            <p>Data da Aposta: {{ aposta.data|date:"d / M / Y" }}</p>
         <a href="{% url  'index' %}" class="btn btn-primary"> Volta ao home </a>
     </div>
     </div>
