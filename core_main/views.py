@@ -21,7 +21,7 @@ from django.contrib import messages, auth
 @login_required(login_url='login')
 def index(request):
     data_hoje = datetime.now().strftime("%Y-%m-%d")
-    aposta = Aposta.objects.filter(usuario_id=request.user.id).order_by('sorteio_aposta__aposta__data')
+    aposta = Aposta.objects.filter(usuario_id=request.user.id).order_by('-sorteio_aposta__aposta__data')
     sorteio = Sorteio.objects.filter(data_sorteio__gte=data_hoje, valido=True)
     paginator = Paginator(aposta, 5)
     page = request.GET.get('p')
@@ -104,7 +104,7 @@ def registrar(request):
         return redirect('login')
     else:
         return render(request, 'core/registrar.html')
-
+@login_required(login_url='login')
 def aposta_feita(request):
     if request.method == 'POST':
         data = request.POST.get('data_valor')
@@ -124,4 +124,4 @@ def aposta_feita(request):
     
 
         return redirect('logout')
-
+    return redirect('login')

@@ -2,19 +2,23 @@
 
 {% block conteudo %}
     <div class="detalhes-container" >
-    <div class="detalhes">
-    <img src="https://i.ytimg.com/vi/EB4BI4l-4HM/maxresdefault.jpg" alt="" style="width: 200px">
+        <div class="detalhes">
+        <img src="{{ aposta.bicho.url }}" alt="" style="width: 200px">
+                <p>Bicho apostado: {{ aposta.bicho }} </p>
+                <p> Valor da aposta: {{ aposta.valor }} </p>
+                        {% if aposta.sorteio_aposta.bicho_sorteado == none  %}
+                          <p class="btn-outline-warning">WAITING</p>
+                          {% else %}
+                        {% if aposta.resultado %}
+                        <p class="btn-outline-success"> {{ 'WIN' }}</p>
+                        {% else %}
+                        <p class="btn-outline-danger">{{ 'LOSE' }}</p>
+                       {% endif %}
+                     {% endif %}
 
-            <p>Bicho apostado: {{ aposta.bicho }} </p>
-            <p> Valor da aposta: {{ aposta.valor }} </p>
-                {% if aposta.resultado %}
-                    <p class="btn-outline-success"> {{ 'WIN' }}</p>
-                    {% else %}
-                    <p class="btn-outline-danger">{{ 'LOSE' }}</p>
-                   {% endif %}
-            <p> Ganhos: {{ aposta.ganho }} </p>
-            <p>Data da Aposta: {{ aposta.data|date:"d / M / Y" }}</p>
-        <a href="{% url  'index' %}" class="btn btn-primary"> Volta ao home </a>
-    </div>
+                <p> Ganhos: {{ aposta.ganho }} </p>
+                <p>Data da Aposta: {{ aposta.data|date:"d / M / Y" }}</p>
+            <a href="{% url  'index' %}" class="btn btn-primary"> Voltar ao home </a>
+        </div>
     </div>
 {% endblock %}

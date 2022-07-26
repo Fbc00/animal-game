@@ -18,7 +18,7 @@
                     <td>  <a href="{%  url 'detalhes' apos.id %}"> {{ apos.bicho }} </a></td>
 
                     {% if apos.sorteio_aposta.bicho_sorteado == none  %}
-                      <td class="btn-outline-warning">AGUARDE</td>
+                      <td class="btn-outline-warning">WAITING</td>
                       {% else %}
                        {% if apos.resultado %}
                       <td class="btn-outline-success">{{ 'WIN' }}</td>
