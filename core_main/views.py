@@ -121,7 +121,6 @@ def aposta_feita(request):
 
         #sorteio_aposta_Agora.strftime("%y/%m/%d")
 
-    
-
-        return redirect('logout')
+        messages.add_message(request, messages.SUCCESS, 'Aposta realizada com sucesso')
+        return redirect('index')
     return redirect('login')
