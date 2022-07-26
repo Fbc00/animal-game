@@ -16,7 +16,7 @@
                         <img src="https://lulacerda.ig.com.br/wp-content/uploads/2021/02/EtJLXE6XEAEOYmX-1024x681.jpeg" alt="">
                         <a href="https://senai.club/senai-belford-roxo-2019-rj/">Saiba mais</a>
                 <li></li>
-                        <li>
+                        <li style="font-weight: bold; font-size: 1.1rem;">
                         <form method="POST" action="{% url 'apostas' %}" class="form-login">
                             {% csrf_token %}
                             <label for=""  name="data">Dia da aposta</label>
@@ -31,7 +31,7 @@
                                 <div class="form-group">
                                 <label for="">Valor</label>
                                 <input type="text" class="form-control valor"  placeholder="" name="valor">
-                                    <small>Aposta entre 1 e 50 conto</small>
+                                    <small style="font-weight: bold">Aposta entre 1 e 50 conto</small>
                                 </div>
                                 <div class="form-group">
                                 <label for="">Bicho</label>

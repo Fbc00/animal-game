@@ -2,13 +2,13 @@
 
 {% block conteudo %}
 
-     <div class="login-container" >
+     <div class="login-container">
 
-         <img src="https://pbs.twimg.com/media/EXrF6pqXgAELXL1.jpg" alt="">
+         <img src="https://pbs.twimg.com/media/EXrF6pqXgAELXL1.jpg" alt="" style="width: 400px; height: 350px; z-index: 99">
          <form method="POST" action="" class="form-login " style="width: 37rem;">
           {% csrf_token %}
           <div class="form-group ">
-            <label for="exampleInputEmail1">Email</label>
+            <label for="exampleInputEmail1">Usuário</label>
             <input type="text" class="form-control"  name="usuario" placeholder="usuario" style="width: 37rem";>
           </div>
           <div class="form-group">

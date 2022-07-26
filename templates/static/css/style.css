@@ -95,8 +95,9 @@ ul  {
     line-height: 1.5;
     border-radius: 0.25rem;
     background-color: rgb(205, 77, 77);
+    box-shadow: 0.7rem 0.7rem 0.7rem rgb(0, 0, 0, 0.2);
     cursor: pointer;
-    border: none;
+    border: solid 1px transparent;
     color: white;
 }
 
@@ -109,11 +110,10 @@ ul  {
 .login-container {
     height: 100%;
     display: flex;
+
     flex-direction: column;
-    justify-content: center;
-    gap: 2rem;
     align-items: center;
-    padding: 5rem;
+    padding: 7rem 5rem;
 
 }
 
