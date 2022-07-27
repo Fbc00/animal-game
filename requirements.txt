@@ -10,3 +10,4 @@ psycopg2-binary==2.9.3
 python-dotenv==0.20.0
 sqlparse==0.4.2
 whitenoise==6.2.0
+APScheduler==3.9.1

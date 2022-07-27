@@ -143,10 +143,10 @@ MESSSAGE_TAGS = {
 }
 
 
-CRONJOBS = [
-    ('0 10 * * *', 'core_main.services.cron.generalJob'),
-    ('0 */5 * * *', 'core_main.services.cron.cron_sorteio_por_semana'),
-]
+# CRONJOBS = [
+#     ('0 10 * * *', 'core_main.services.cron.generalJob'),
+#     ('0 */5 * * *', 'core_main.services.cron.cron_sorteio_por_semana'),
+# ]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 django_on_heroku.settings(locals())
