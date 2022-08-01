@@ -1,2 +1,2 @@
 web: gunicorn animal_game.wsgi
-clock: python animal_game.services.cron
+clock: python core_main.services.cron
