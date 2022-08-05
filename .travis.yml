@@ -1,0 +1,8 @@
+lenguage: python
+python:
+  - 3.8
+install:
+  - pip install -q -r requeriments.txt
+script:
+  - test
+  - pytest test.py
