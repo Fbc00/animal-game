@@ -8,7 +8,7 @@ from django.contrib.postgres.fields import ArrayField
 
 
 class Aposta(models.Model):
-    bicho = models.ForeignKey('Bicho', on_delete=models.DO_NOTHING)
+    bicho = models.ForeignKey('Bicho', on_delete=models.DO_NOTHING, related_name='bicho_aposta')
     data = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     resultado = models.BooleanField(default=False)
@@ -45,5 +45,12 @@ class Sorteio(models.Model):
     def get_data_sorteio(self):
         return  self.data_sorteio.strftime("%Y-%m-%d")
 
+
+    def to_json_dict(self):
+        return  {
+            "bicho_sorteado": self.bicho_sorteado,
+            "valido": self.valido,
+            "data_sorteio": self.data_sorteio
+        }
 
 

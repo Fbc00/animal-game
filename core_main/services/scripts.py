@@ -30,7 +30,7 @@ def verifica_se_ganhou():
     data = datetime.today().strftime('%Y-%m-%d')
     data_ganho = datetime.today()
     sorteio_do_dia = Sorteio.objects.get(data_sorteio=data)
-    ganhadores = Aposta.objects.filter(bicho_id=sorteio_do_dia.bicho_sorteado_id,
+    ganhadores = Aposta.objects.filter(bicho_id=sorteio_do_dia.bicho_do_dia.id,
                                        sorteio_aposta_id=sorteio_do_dia.pk).update(resultado=True, ganho=F('valor') * 18)
     return
 

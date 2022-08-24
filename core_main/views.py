@@ -22,7 +22,9 @@ from django.contrib import messages, auth
 def index(request):
     data_hoje = datetime.now().strftime("%Y-%m-%d")
     aposta = Aposta.objects.filter(usuario_id=request.user.id).order_by('-sorteio_aposta__aposta__data')
+    aposta.select_related('bicho')
     sorteio = Sorteio.objects.filter(data_sorteio__gte=data_hoje, valido=True)
+    sorteio.select_related('bicho_sorteado')
     paginator = Paginator(aposta, 5)
     page = request.GET.get('p')
     aposta = paginator.get_page(page)
